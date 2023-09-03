@@ -1,3 +1,9 @@
+# Website
+https://ivory-ashy.vercel.app
+
+# Api
+https://api-ninjas.com/api/exercises
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
