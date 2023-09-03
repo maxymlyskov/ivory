@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios from "axios";
 
 export interface FetchResponse<T> {
   count: number;
@@ -8,9 +8,9 @@ export interface FetchResponse<T> {
 }
 
 const axiosInstance = axios.create({
-  baseURL: "https://api.api-ninjas.com/v1/exercises",
-  params: {
-    key: "ymHXrcsanOMyyVGFwglrcg==8wPBoqE6DKQn5DvN",
+  baseURL: "https://api.api-ninjas.com",
+  headers: {
+    "x-api-key": "ymHXrcsanOMyyVGFwglrcg==8wPBoqE6DKQn5DvN",
   },
 });
 
@@ -21,15 +21,15 @@ class APIClient<T> {
     this.endpoint = endpoint;
   }
 
-  getAll = (config: AxiosRequestConfig) => {
+  get = (id?: string | number, params?: { [key: string]: string }) => {
     return axiosInstance
-      .get<FetchResponse<T>>(this.endpoint, config)
+      .get<T>(this.endpoint + "/" + id, { params })
       .then((res) => res.data);
   };
 
-  get = (id: string | number) => {
+  getSearch = (params?: { [key: string]: string }) => {
     return axiosInstance
-      .get<T>(this.endpoint + "/" + id)
+      .get<T>(this.endpoint, { params })
       .then((res) => res.data);
   };
 }
