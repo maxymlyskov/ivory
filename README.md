@@ -4,7 +4,16 @@ https://ivory-ashy.vercel.app
 # Api
 https://api-ninjas.com/api/exercises
 
-# React + TypeScript + Vite
+# Run project
+
+https://api-ninjas.com/api/exercises
+
+- Install dependencies
+``` npm install ```
+- Run development server
+``` npm run dev ```
+- Go to local server link
+[http://localhost:5173]
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
