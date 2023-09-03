@@ -6,8 +6,6 @@ https://api-ninjas.com/api/exercises
 
 # Run project
 
-https://api-ninjas.com/api/exercises
-
 - Install dependencies
 ``` npm install ```
 - Run development server
@@ -15,6 +13,7 @@ https://api-ninjas.com/api/exercises
 - Go to [local server link](http://localhost:5173)
   
 
+# Vite
 
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
