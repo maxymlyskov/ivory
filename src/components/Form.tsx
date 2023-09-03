@@ -1,51 +1,60 @@
-import {
-  Button,
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
-  Input,
-} from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FieldValues, useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
 import { z } from "zod";
 import { excercies } from "../data/excercies";
+import { difficulty, muscles, types } from "../data/formSchemaValues";
+import { objectToQueryString } from "../utils";
+import ExcerciseFormControl from "./ExcerciseFormControl";
 
 const schema = z.object({
-  title: z.string().min(3),
-  type: z.string(),
-  muscle: z.string(),
-  equipment: z.string(),
-  difficulty: z.string(),
+  name: z.string(),
+  type: z.enum([...types, ""]),
+  muscle: z.enum([...muscles, ""]),
+  difficulty: z.enum([...difficulty, ""]),
 });
 
-type FormData = z.infer<typeof schema>;
+export type FormData = z.infer<typeof schema>;
 
 const Form = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
+  const navigate = useNavigate();
 
-  const onSubmit = (data: FieldValues) => console.log(data);
+  const watchedValues = watch();
+
+  const allInputsAreEmpty = () => {
+    return Object.values(watchedValues).every((value) => !value);
+  };
+
+  const onSubmit = (data: FieldValues) =>
+    navigate(`excercises${objectToQueryString(data)}`);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {excercies.map((excercise) => (
-        <FormControl isInvalid={!!errors[excercise.id]}>
-          <FormLabel htmlFor={excercise.id}>{excercise.label}</FormLabel>
-          <Input
-            id={excercise.id}
-            {...register(excercise.id)}
-            placeholder={excercise.placeholder}
-          />
-          <FormErrorMessage>{errors[excercise.id]?.message}</FormErrorMessage>
-        </FormControl>
+        <ExcerciseFormControl
+          key={excercise.id}
+          excercise={excercise}
+          isError={!!errors[excercise.id]}
+          errorMessage={errors[excercise.id]?.message}
+          register={register}
+        />
       ))}
-      <Button mt={10} colorScheme="teal" type="submit">
-        Submit
+      <Button
+        mt={10}
+        colorScheme="teal"
+        type="submit"
+        isDisabled={allInputsAreEmpty()}
+      >
+        Search
       </Button>
     </form>
   );
