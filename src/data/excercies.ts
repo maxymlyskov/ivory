@@ -1,14 +1,10 @@
-interface Excercise {
-  id: "title" | "type" | "muscle" | "difficulty" | "equipment";
-  placeholder: string;
-  label: string;
-}
+import { ExcerciseFormProps } from "../entitites/excercises";
 
-export const excercies: Excercise[] = [
+export const excercies: ExcerciseFormProps[] = [
   {
-    id: "title",
-    placeholder: "Enter your title",
-    label: "Title",
+    id: "name",
+    placeholder: "Enter your name",
+    label: "Name",
   },
   {
     id: "type",
@@ -19,11 +15,6 @@ export const excercies: Excercise[] = [
     id: "muscle",
     placeholder: "Enter your muscle",
     label: "Muscle",
-  },
-  {
-    id: "equipment",
-    placeholder: "Enter your equipment",
-    label: "Equipment",
   },
   {
     id: "difficulty",

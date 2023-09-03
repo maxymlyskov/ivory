@@ -1,12 +1,11 @@
-import { Input } from "@chakra-ui/react";
-import React from "react";
+import { VStack } from "@chakra-ui/react";
 import Form from "../components/Form";
 
 const HomePage = () => {
   return (
-    <div>
+    <VStack alignItems="center" justifyContent="center" height="100vh">
       <Form />
-    </div>
+    </VStack>
   );
 };
 
