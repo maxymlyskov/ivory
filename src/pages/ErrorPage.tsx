@@ -1,11 +1,18 @@
 import React from "react";
-import { Box, Heading, Text, VStack, Button } from "@chakra-ui/react";
+import { Box, Heading, Text, VStack, Button, HStack } from "@chakra-ui/react";
+import { useNavigate } from "react-router";
 
 interface ErrorPageProps {
   onRetry?: () => void;
 }
 
 const ErrorPage: React.FC<ErrorPageProps> = ({ onRetry }) => {
+  const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    navigate("/");
+  };
+
   return (
     <VStack
       spacing={5}
@@ -17,10 +24,16 @@ const ErrorPage: React.FC<ErrorPageProps> = ({ onRetry }) => {
         <Heading size="md">No Exercises Found</Heading>
         <Text>It seems we couldn't find any exercises for you.</Text>
       </Box>
+
       {onRetry && (
-        <Button colorScheme="teal" onClick={onRetry}>
-          Retry
-        </Button>
+        <HStack>
+          <Button colorScheme="red" onClick={handleGoBack}>
+            Go back
+          </Button>
+          <Button colorScheme="teal" onClick={onRetry}>
+            Retry
+          </Button>
+        </HStack>
       )}
     </VStack>
   );
