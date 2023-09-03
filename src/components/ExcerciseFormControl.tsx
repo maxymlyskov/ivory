@@ -23,7 +23,7 @@ const ExcerciseFormControl: FC<Props> = ({
   errorMessage,
 }) => {
   return (
-    <FormControl key={excercise.id} isInvalid={isError} width="400px">
+    <FormControl key={excercise.id} isInvalid={isError}>
       <FormLabel htmlFor={excercise.id}>{excercise.label}</FormLabel>
       <Input
         id={excercise.id}
